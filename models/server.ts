@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import http from 'http';
 import SocketIO from 'socket.io';
-import path from 'path';
+import cors from 'cors';
 import { Sockets } from './sockets';
 
 export type ServerConfig = {
@@ -22,11 +22,18 @@ export class Server {
     this.server = http.createServer(this.app);
 
     // socket.io server
-    this.io = new SocketIO.Server(this.server, {});
+    this.io = new SocketIO.Server(this.server, {
+      cors: {
+        origin: '*',
+        methods: 'GET,POST,PUT,DELETE,OPTIONS',
+        allowedHeaders: 'Content-Type, Authorization, X-Requested-With, X-Socket-ID',
+      },
+    });
   }
 
   middlewares() {
     this.app.use(express.static('public'));
+    this.app.use(cors());
   }
 
   configureSockets() {
