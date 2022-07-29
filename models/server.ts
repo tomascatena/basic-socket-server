@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express } from 'express';
 import http from 'http';
 import SocketIO from 'socket.io';
 import path from 'path';
@@ -11,7 +11,7 @@ export type ServerConfig = {
 
 export class Server {
   port: number | string;
-  app: express.Application;
+  app: Express;
   server: http.Server;
   io: SocketIO.Server;
   publicPath: string;
