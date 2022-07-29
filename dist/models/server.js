@@ -7,12 +7,10 @@ exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
-const path_1 = __importDefault(require("path"));
 const sockets_1 = require("./sockets");
 class Server {
     constructor(serverConfig) {
         this.port = serverConfig.port;
-        this.publicPath = serverConfig.publicPath || path_1.default.resolve(__dirname, '../public');
         this.app = (0, express_1.default)();
         // http server
         this.server = http_1.default.createServer(this.app);
