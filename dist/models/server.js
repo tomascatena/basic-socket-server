@@ -20,7 +20,7 @@ class Server {
         this.io = new socket_io_1.default.Server(this.server, {});
     }
     middlewares() {
-        this.app.use(express_1.default.static(this.publicPath));
+        this.app.use(express_1.default.static('public'));
     }
     configureSockets() {
         const sockets = new sockets_1.Sockets({ io: this.io });

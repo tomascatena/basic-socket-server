@@ -6,7 +6,6 @@ import { Sockets } from './sockets';
 
 export type ServerConfig = {
   port: number | string;
-  publicPath?: string;
 };
 
 export class Server {
@@ -14,11 +13,9 @@ export class Server {
   app: Express;
   server: http.Server;
   io: SocketIO.Server;
-  publicPath: string;
 
   constructor(serverConfig: ServerConfig) {
     this.port = serverConfig.port;
-    this.publicPath = serverConfig.publicPath || path.resolve(__dirname, '../public');
     this.app = express();
 
     // http server
@@ -29,7 +26,7 @@ export class Server {
   }
 
   middlewares() {
-    this.app.use(express.static(this.publicPath));
+    this.app.use(express.static('public'));
   }
 
   configureSockets() {
